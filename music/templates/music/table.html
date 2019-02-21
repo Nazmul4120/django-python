@@ -1,0 +1,23 @@
+
+    <tr>
+        <td>{{ song.song_title }}</td>
+        <td>
+            <a target="_blank" href="{{ song.audio_file.url }}">
+                <button type="button" class="btn btn-success btn-xs">
+                    <span class="glyphicon glyphicon-play"></span>&nbsp; Play
+                </button>
+            </a>
+        </td>
+        <td>
+            <a href="{% url 'music:favorite' song.id %}" class="btn-favorite"><span class="glyphicon glyphicon-star {% if song.is_favorite %}active{% endif %}"></span></a>
+        </td>
+        <td>
+            <form onSubmit="functionName(event)" eval="deleteRow($this,$ajaxTarget,data)" ajax-target="null" action="{% url 'music:delete_song' song.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="song_id" value="{{ song.id }}" />
+                <button type="submit" class="btn btn-danger btn-xs">
+                    <span class="glyphicon glyphicon-remove"></span>&nbsp; Delete
+                </button>
+            </form>
+        </td>
+    </tr>
